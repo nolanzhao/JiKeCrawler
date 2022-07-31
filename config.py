@@ -1,19 +1,24 @@
 import os
 
-# CHROMEDRIVER_PATH = "/Users/nolan/chromedriver"
 BASE_DIR = os.path.dirname("__file__")
 DATA_DIR = os.path.join(BASE_DIR, "data")
+CHROMEDRIVER_PATH = os.path.abspath(os.path.join(BASE_DIR, 'bin', 'chromedriver'))
 
-MAX_PAGE = 10
+
+BASE_URL = "https://web.okjike.com/"
+LOGIN_URL = f"{BASE_URL}/login"
+
+
+MAX_PAGE = 20
 
 TOPIC_IDS = [
+    {"科技圈大小事": "597ae4ac096cde0012cf6c06"},
     {"浴室沉思": "5618c159add4471100150637"},
     {"小散户的日常": "5b288dde7eea410017e98d20"},
-    {"读书会": "5a158e62a0ef4f00117ab145"},
+    {"读书会": "5a158e62a0ef4f00117ab145"}
 ]
 
 HEADERS = {
-    # ':authority': 'web-api.okjike.com',
     'method': 'POST',
     'path': '/api/graphql',
     'scheme': 'https',
@@ -46,5 +51,21 @@ PAYLOAD = {
 }
 
 
-with open(os.path.join(BASE_DIR, 'COOKIE'), "r") as f:
-    HEADERS["cookie"] = f.read()
+cookie_file_path = os.path.join(BASE_DIR, 'COOKIE')
+if os.path.exists(cookie_file_path):
+    with open(cookie_file_path, "r") as f:
+        HEADERS["cookie"] = f.read()
+else:
+    HEADERS["cookie"] = input(">> 请输入cookie: \n")
+
+
+
+# MONGODB
+MONGODB = {
+  "HOST": "127.0.0.1",
+  "PORT": 27168,
+  "USERNAME": "",
+  "PASSWORD": "",
+  "DB": "jike"
+}
+

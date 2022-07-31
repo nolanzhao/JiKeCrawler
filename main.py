@@ -1,9 +1,9 @@
-
 import json
-from utils import save_json
 import requests
 import time
-from utils import N
+from datetime import datetime
+from utils import N, save_json, save_mongo
+from cookie_tools import init_cookie
 from config import *
 
 
@@ -16,8 +16,8 @@ def retrive(lastId=""):
     return rawData
 
 
-
 def main():
+    init_cookie()
     lastId = ""
     for topic in TOPIC_IDS:
         topicName, topicId = tuple(topic.items())[0]
@@ -27,17 +27,14 @@ def main():
             rawData = retrive(lastId)
             if rawData is None:
                 return
-            nodes = rawData.get("data", {}).get("topic", {}).get("feeds", {}).get("nodes", [])
-            if nodes is None or len(nodes) == 0:
+            # print(rawData)
+            nodes = (((rawData.get("data", {}) or {}).get("topic", {}) or {}).get("feeds", {}) or {}).get("nodes", []) or []
+            if len(nodes) == 0:
                 return
             lastId = nodes[-1]["id"]
-            save_json(rawData, topicName, f'raw_{i}.json')
+            save_json(rawData, topicName, f'raw_{i}_{datetime.now().strftime("%Y-%m-%d_%H:%M:%S")}.json')
+            save_mongo(nodes, topicName)
             time.sleep(N())
-
-    
-
-    
-
 
 
 if __name__ == "__main__":

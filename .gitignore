@@ -4,3 +4,5 @@ __pycache__/
 backup/
 data/
 COOKIE
+tmp.py
+
