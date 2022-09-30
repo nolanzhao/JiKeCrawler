@@ -14,3 +14,9 @@ docker run -p 27168:27017 --restart always -v /Users/用户名/MongoData/db:/dat
 ## 运行
 python main.py
 
+
+## 常见问题
+1. ChromeDriver版本跟 chrome 浏览器不一致
+下载地址: https://chromedriver.storage.googleapis.com/index.htm
+
+
