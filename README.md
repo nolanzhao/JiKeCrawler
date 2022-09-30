@@ -8,6 +8,8 @@ docker run -p 27168:27017 --restart always -v /Users/用户名/MongoData/db:/dat
 
 
 ## 启动Chrome
+
+#### 先关掉别的浏览器窗口，不然容易报错
 ./start_chrome.sh
 
 
