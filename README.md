@@ -19,6 +19,6 @@ python main.py
 
 ## 4. 常见问题
 + ChromeDriver版本跟 chrome 浏览器不一致
-下载地址: https://chromedriver.storage.googleapis.com/index.htm
+下载地址: https://chromedriver.storage.googleapis.com/index.html
 
 
